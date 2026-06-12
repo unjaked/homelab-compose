@@ -2,6 +2,7 @@
 # Compose for media-related services. Primarily for Jellyfin and the services it utilizes.
 
 services:
+# Media Manager Server
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
@@ -10,7 +11,147 @@ services:
       - ${CONFIG_ROOT}/jellyfin/config:/config
       - ${CONFIG_ROOT}/jellyfin/cache:/cache
       - ${DATA_ROOT}:/data
+      - /mnt/decypharr:/mnt/decypharr:ro,rshared
     ports:
       - 8096:8096/tcp
       - 7359:7359/udp
+    restart: unless-stopped
+# Movie Manager/Automater
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/radarr:/config
+      - ${DATA_ROOT}:/data
+      - /mnt/decypharr:/mnt/decypharr:rshared
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+# TV Manager/Automater
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/sonarr:/config
+      - ${DATA_ROOT}:/data
+      - /mnt/decypharr:/mnt/decypharr:rshared
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+# Subtitle Manager/Automater
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/bazarr:/config
+      - ${DATA_ROOT}:/data
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+# Usenet Client
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/sabnzbd:/config
+      - ${DATA_ROOT}:/data
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+# Index Manager
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/prowlarr:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+# Front-end for users to request content
+  seerr:
+    image: seerr/seerr:latest
+    container_name: seerr
+    init: true
+    environment:
+      - TZ=${TZ}
+      - PORT=5055
+      - LOG_LEVEL=info
+    volumes:
+      - ${CONFIG_ROOT}/seerr:/app/config
+    ports:
+      - 5055:5055
+    restart: unless-stopped
+# Torrent
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - WEBUI_PORT=8081
+      - TORRENTING_PORT=6881
+    volumes:
+      - ${CONFIG_ROOT}/qbittorrent:/config
+      - ${DATA_ROOT}:/data
+    ports:
+      - 8081:8081
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+# Debrid-Arr Interface (streaming)
+  decypharr:
+    image: cy01/blackhole:latest
+    container_name: decypharr
+#    user: "${PUID}:${PGID}"
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=002
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/decypharr:/app
+      - /mnt:/mnt:rshared
+      - ${DATA_ROOT}:/data
+    ports:
+      - 8282:8282
+    devices:
+      - /dev/fuse:/dev/fuse:rwm
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    restart: unless-stopped
+# Cloudflare protection bypass for Prowlarr
+  byparr:
+    image: ghcr.io/thephaseless/byparr:latest
+    container_name: byparr
+    environment:
+      - TZ=${TZ}
+      - HOST=0.0.0.0
+      - PORT=8191
+    volumes:
+      - ${CONFIG_ROOT}/byparr/screenshots:/app/screenshots
+    ports:
+      - 8191:8191
     restart: unless-stopped
