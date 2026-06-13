@@ -1,0 +1,177 @@
+[
+  {
+    "title": "Spirited Away",
+    "tmdb_id": 129,
+    "imdb_id": "tt0245429",
+    "poster_url": null,
+    "genres": ["fantasy", "adventure", "animation", "family"]
+  },
+  {
+    "title": "Demon Slayer: Kimetsu No Yaiba Infinity Castle",
+    "tmdb_id": 1311031,
+    "imdb_id": "tt32820897",
+    "poster_url": null,
+    "genres": ["animation", "action", "fantasy", "thriller"]
+  },
+  {
+    "title": "Your Name.",
+    "tmdb_id": 372058,
+    "imdb_id": "tt5311514",
+    "poster_url": null,
+    "genres": ["romance", "animation", "drama"]
+  },
+  {
+    "title": "Grave of the Fireflies",
+    "tmdb_id": 12477,
+    "imdb_id": "tt0095327",
+    "poster_url": null,
+    "genres": ["animation", "drama", "war"]
+  },
+  {
+    "title": "Chainsaw Man - The Movie: Reze Arc",
+    "tmdb_id": 1218925,
+    "imdb_id": "tt30472557",
+    "poster_url": null,
+    "genres": ["animation", "action", "romance", "fantasy"]
+  },
+  {
+    "title": "Howl's Moving Castle",
+    "tmdb_id": 4935,
+    "imdb_id": "tt0347149",
+    "poster_url": null,
+    "genres": ["fantasy", "animation", "adventure"]
+  },
+  {
+    "title": "Princess Mononoke",
+    "tmdb_id": 128,
+    "imdb_id": "tt0119698",
+    "poster_url": null,
+    "genres": ["adventure", "fantasy", "animation"]
+  },
+  {
+    "title": "Perfect Blue",
+    "tmdb_id": 10494,
+    "imdb_id": "tt0156887",
+    "poster_url": null,
+    "genres": ["animation", "thriller"]
+  },
+  {
+    "title": "My Neighbor Totoro",
+    "tmdb_id": 8392,
+    "imdb_id": "tt0096283",
+    "poster_url": null,
+    "genres": ["fantasy", "animation", "family"]
+  },
+  {
+    "title": "Attack on Titan: The Last Attack",
+    "tmdb_id": 1333100,
+    "imdb_id": "tt33175825",
+    "poster_url": null,
+    "genres": ["animation", "action", "drama", "fantasy"]
+  },
+  {
+    "title": "A Silent Voice: The Movie",
+    "tmdb_id": 378064,
+    "imdb_id": "tt5323662",
+    "poster_url": null,
+    "genres": ["animation", "drama"]
+  },
+  {
+    "title": "Akira",
+    "tmdb_id": 149,
+    "imdb_id": "tt0094625",
+    "poster_url": null,
+    "genres": ["animation", "science_fiction", "action"]
+  },
+  {
+    "title": "Ghost in the Shell",
+    "tmdb_id": 9323,
+    "imdb_id": "tt0113568",
+    "poster_url": null,
+    "genres": ["action", "animation", "science_fiction"]
+  },
+  {
+    "title": "Paprika",
+    "tmdb_id": 4977,
+    "imdb_id": "tt0851578",
+    "poster_url": null,
+    "genres": ["animation", "science_fiction", "thriller"]
+  },
+  {
+    "title": "The Boy and the Heron",
+    "tmdb_id": 508883,
+    "imdb_id": "tt6587046",
+    "poster_url": null,
+    "genres": ["animation", "adventure", "fantasy"]
+  },
+  {
+    "title": "Ponyo",
+    "tmdb_id": 12429,
+    "imdb_id": "tt0876563",
+    "poster_url": null,
+    "genres": ["animation", "fantasy", "family"]
+  },
+  {
+    "title": "Kiki's Delivery Service",
+    "tmdb_id": 16859,
+    "imdb_id": "tt0097814",
+    "poster_url": null,
+    "genres": ["animation", "family", "fantasy", "adventure"]
+  },
+  {
+    "title": "Scarlet",
+    "tmdb_id": 1406657,
+    "imdb_id": "tt35114460",
+    "poster_url": null,
+    "genres": ["animation", "fantasy", "action"]
+  },
+  {
+    "title": "The Lord of the Rings: The War of the Rohirrim",
+    "tmdb_id": 839033,
+    "imdb_id": "tt14824600",
+    "poster_url": null,
+    "genres": ["animation", "fantasy", "adventure", "action"]
+  },
+  {
+    "title": "Castle in the Sky",
+    "tmdb_id": 10515,
+    "imdb_id": "tt0092067",
+    "poster_url": null,
+    "genres": ["adventure", "fantasy", "animation", "action", "family"]
+  },
+  {
+    "title": "Suzume",
+    "tmdb_id": 916224,
+    "imdb_id": "tt16428256",
+    "poster_url": null,
+    "genres": ["animation", "drama", "adventure", "fantasy"]
+  },
+  {
+    "title": "The Wind Rises",
+    "tmdb_id": 149870,
+    "imdb_id": "tt2013293",
+    "poster_url": null,
+    "genres": ["animation", "drama", "romance", "war", "history"]
+  },
+  {
+    "title": "Nausicaä of the Valley of the Wind",
+    "tmdb_id": 81,
+    "imdb_id": "tt0087544",
+    "poster_url": null,
+    "genres": ["adventure", "animation", "fantasy"]
+  },
+  {
+    "title": "I Want to Eat Your Pancreas",
+    "tmdb_id": 504253,
+    "imdb_id": "tt7236034",
+    "poster_url": null,
+    "genres": ["animation", "drama", "romance"]
+  },
+  {
+    "title": "The Secret World of Arrietty",
+    "tmdb_id": 51739,
+    "imdb_id": "tt1568921",
+    "poster_url": null,
+    "genres": ["fantasy", "animation", "family"]
+  }
+]
