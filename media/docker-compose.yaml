@@ -61,19 +61,19 @@ services:
       - 6767:6767
     restart: unless-stopped
 # Usenet Client
-  sabnzbd:
-    image: lscr.io/linuxserver/sabnzbd:latest
-    container_name: sabnzbd
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - ${CONFIG_ROOT}/sabnzbd:/config
-      - ${DATA_ROOT}:/data
-    ports:
-      - 8080:8080
-    restart: unless-stopped
+#  sabnzbd:
+#    image: lscr.io/linuxserver/sabnzbd:latest
+#    container_name: sabnzbd
+#    environment:
+#      - PUID=${PUID}
+#      - PGID=${PGID}
+#      - TZ=${TZ}
+#    volumes:
+#      - ${CONFIG_ROOT}/sabnzbd:/config
+#      - ${DATA_ROOT}:/data
+#    ports:
+#      - 8080:8080
+#    restart: unless-stopped
 # Index Manager
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
@@ -102,23 +102,23 @@ services:
       - 5055:5055
     restart: unless-stopped
 # Torrent
-  qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: qbittorrent
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      - WEBUI_PORT=8081
-      - TORRENTING_PORT=6881
-    volumes:
-      - ${CONFIG_ROOT}/qbittorrent:/config
-      - ${DATA_ROOT}:/data
-    ports:
-      - 8081:8081
-      - 6881:6881
-      - 6881:6881/udp
-    restart: unless-stopped
+#  qbittorrent:
+#    image: lscr.io/linuxserver/qbittorrent:latest
+#    container_name: qbittorrent
+#    environment:
+#      - PUID=${PUID}
+#      - PGID=${PGID}
+#      - TZ=${TZ}
+#      - WEBUI_PORT=8081
+#      - TORRENTING_PORT=6881
+#    volumes:
+#      - ${CONFIG_ROOT}/qbittorrent:/config
+#      - ${DATA_ROOT}:/data
+#    ports:
+#      - 8081:8081
+#      - 6881:6881
+#      - 6881:6881/udp
+#    restart: unless-stopped
 # Debrid-Arr Interface (streaming)
   decypharr:
     image: cy01/blackhole:latest
@@ -155,3 +155,45 @@ services:
     ports:
       - 8191:8191
     restart: unless-stopped
+# Arr File Cleanup Automation
+  cleanuparr:
+    image: ghcr.io/cleanuparr/cleanuparr:latest
+    container_name: cleanuparr
+    restart: unless-stopped
+    ports:
+      - "11011:11011"
+    volumes:
+      - ${CONFIG_ROOT}/cleanuparr:/config
+      # Optional but useful for inspecting your final media/symlink structure.
+      # Keep read-only at first so Cleanuparr cannot delete files while we test.
+      - ${DATA_ROOT}:/data:ro
+      - /mnt/decypharr:/downloads/decypharr:ro,rshared
+    environment:
+      - PORT=11011
+      - BASE_PATH=
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=022
+      - TZ=${TZ}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11011/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 30s
+      retries: 3
+# Anime Metadata Engine
+#  shoko:
+#    image: ghcr.io/shokoanime/server:latest
+#    container_name: shoko
+#    shm_size: 256m
+#    restart: unless-stopped
+#    environment:
+#      - PUID=${PUID}
+#      - PGID=${PGID}
+#      - TZ=${TZ}
+#    ports:
+#      - "8111:8111"
+#    volumes:
+#      - ${CONFIG_ROOT}/shoko:/home/shoko/.shoko
+#      - ${DATA_ROOT}/media/anime-tv:/mnt/anime-tv
+#      - ${DATA_ROOT}/media/anime-movies:/mnt/anime-movies
