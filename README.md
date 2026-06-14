@@ -2,7 +2,11 @@
 
 ## Media
 
-Jellyfin front-end *(with several plugins)*, *arr back-end. For streaming movies and TV shows with a limited free-tier IPTV selection.
+[Jellyfin](https://jellyfin.org/) front-end *(with several plugins)* and [*arr](https://wiki.servarr.com/) back-end. 
+
+Self-hosted media system for streaming movies and TV shows.
+
+**Full Stack:** Jellyfin, Seerr, Radarr, Sonarr, Bazarr, Prowlarr, Decyparr, Byparr, Cleanuparr 
 
 ### Stack Flow
 ```
