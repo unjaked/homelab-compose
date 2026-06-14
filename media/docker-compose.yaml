@@ -46,6 +46,8 @@ services:
       - ${DATA_ROOT}:/data
       - /mnt/decypharr:/mnt/decypharr:rshared
       - ${NAS_ROOT}:/nas
+      - ${CONFIG_ROOT}/sonarr:/config
+      - ${CONFIG_ROOT}/sonarr/custom-cont-init.d:/custom-cont-init.d:ro
     ports:
       - 8989:8989
     restart: unless-stopped
