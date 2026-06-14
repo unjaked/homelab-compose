@@ -12,6 +12,7 @@ services:
       - ${CONFIG_ROOT}/jellyfin/cache:/cache
       - ${DATA_ROOT}:/data
       - /mnt/decypharr:/mnt/decypharr:ro,rshared
+      - ${NAS_ROOT}:/nas
     ports:
       - 8096:8096/tcp
       - 7359:7359/udp
@@ -28,6 +29,7 @@ services:
       - ${CONFIG_ROOT}/radarr:/config
       - ${DATA_ROOT}:/data
       - /mnt/decypharr:/mnt/decypharr:rshared
+      - ${NAS_ROOT}:/nas
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -43,6 +45,7 @@ services:
       - ${CONFIG_ROOT}/sonarr:/config
       - ${DATA_ROOT}:/data
       - /mnt/decypharr:/mnt/decypharr:rshared
+      - ${NAS_ROOT}:/nas
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -98,6 +101,7 @@ services:
       - LOG_LEVEL=info
     volumes:
       - ${CONFIG_ROOT}/seerr:/app/config
+      - ${NAS_ROOT}:/nas
     ports:
       - 5055:5055
     restart: unless-stopped
