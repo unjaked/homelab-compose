@@ -3,6 +3,12 @@ Description=Run broken media symlink cleanup nightly
 
 [Timer]
 OnCalendar=*-*-* 04:30:00
+OnCalendar=*-*-* 04:30:00
+OnCalendar=*-*-* 10:30:00
+OnCalendar=*-*-* 16:30:00
+OnCalendar=*-*-* 22:30:00
+Persistent=true
+Unit=cleanup-broken-media-symlinks.service
 Persistent=true
 Unit=cleanup-broken-media-symlinks.service
 
