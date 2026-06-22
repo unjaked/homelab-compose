@@ -126,7 +126,7 @@ services:
 #    restart: unless-stopped
 # Debrid-Arr Interface (streaming)
   decypharr:
-    image: cy01/blackhole:latest
+    image: local/decypharr:twistedrat-partial-link-failure
     container_name: decypharr
 #    user: "${PUID}:${PGID}"
     environment:
@@ -134,6 +134,7 @@ services:
       - PGID=${PGID}
       - UMASK=002
       - TZ=${TZ}
+      - DECYPHARR_RATE_LIMIT_RETRIES=5
     volumes:
       - ${CONFIG_ROOT}/decypharr:/app
       - /mnt:/mnt:rshared
