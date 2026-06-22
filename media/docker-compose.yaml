@@ -2,7 +2,7 @@
 # Compose for media-related services. Primarily for Jellyfin and the services it utilizes.
 
 services:
-# Media Manager Server
+# Jellyfin: Media Management System
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
@@ -17,7 +17,24 @@ services:
       - 8096:8096/tcp
       - 7359:7359/udp
     restart: unless-stopped
-# Movie Manager/Automater
+
+# Seerr: Front-end for media requests
+  seerr:
+    image: seerr/seerr:latest
+    container_name: seerr
+    init: true
+    environment:
+      - TZ=${TZ}
+      - PORT=5055
+      - LOG_LEVEL=info
+    volumes:
+      - ${CONFIG_ROOT}/seerr:/app/config
+      - ${NAS_ROOT}:/nas
+    ports:
+      - 5055:5055
+    restart: unless-stopped
+
+# Radarr: Movie Collection Manager & Torrent/Usenet Automater
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
@@ -33,7 +50,8 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
-# TV Manager/Automater
+
+# Sonarr: Show Collection Manager & Torrent/Usenet Automater
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
@@ -50,7 +68,8 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
-# Subtitle Manager/Automater
+
+# Bazarr: Subtitle Manager & Automater
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
@@ -61,24 +80,12 @@ services:
     volumes:
       - ${CONFIG_ROOT}/bazarr:/config
       - ${DATA_ROOT}:/data
+      - /mnt/decypharr:/mnt/decypharr:ro,rshared
     ports:
       - 6767:6767
     restart: unless-stopped
-# Usenet Client
-#  sabnzbd:
-#    image: lscr.io/linuxserver/sabnzbd:latest
-#    container_name: sabnzbd
-#    environment:
-#      - PUID=${PUID}
-#      - PGID=${PGID}
-#      - TZ=${TZ}
-#    volumes:
-#      - ${CONFIG_ROOT}/sabnzbd:/config
-#      - ${DATA_ROOT}:/data
-#    ports:
-#      - 8080:8080
-#    restart: unless-stopped
-# Index Manager
+
+# Prowlarr: Torrent/Usenet Indexer Manager
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
@@ -91,40 +98,8 @@ services:
     ports:
       - 9696:9696
     restart: unless-stopped
-# Front-end for users to request content
-  seerr:
-    image: seerr/seerr:latest
-    container_name: seerr
-    init: true
-    environment:
-      - TZ=${TZ}
-      - PORT=5055
-      - LOG_LEVEL=info
-    volumes:
-      - ${CONFIG_ROOT}/seerr:/app/config
-      - ${NAS_ROOT}:/nas
-    ports:
-      - 5055:5055
-    restart: unless-stopped
-# Torrent
-#  qbittorrent:
-#    image: lscr.io/linuxserver/qbittorrent:latest
-#    container_name: qbittorrent
-#    environment:
-#      - PUID=${PUID}
-#      - PGID=${PGID}
-#      - TZ=${TZ}
-#      - WEBUI_PORT=8081
-#      - TORRENTING_PORT=6881
-#    volumes:
-#      - ${CONFIG_ROOT}/qbittorrent:/config
-#      - ${DATA_ROOT}:/data
-#    ports:
-#      - 8081:8081
-#      - 6881:6881
-#      - 6881:6881/udp
-#    restart: unless-stopped
-# Debrid-Arr Interface (streaming)
+
+# Decypharr: Debrid-Arr Interface
   decypharr:
     image: local/decypharr:twistedrat-partial-link-failure
     container_name: decypharr
@@ -148,7 +123,8 @@ services:
     security_opt:
       - apparmor:unconfined
     restart: unless-stopped
-# Cloudflare protection bypass for Prowlarr
+
+# Byparr: Cloudflare protection bypasser (for Prowlarr)
   byparr:
     image: ghcr.io/thephaseless/byparr:latest
     container_name: byparr
@@ -161,6 +137,7 @@ services:
     ports:
       - 8191:8191
     restart: unless-stopped
+
 # Arr File Cleanup Automation
   cleanuparr:
     image: ghcr.io/cleanuparr/cleanuparr:latest
@@ -187,6 +164,41 @@ services:
       timeout: 10s
       start_period: 30s
       retries: 3
+      
+# qBittorrent: Torrent client 
+#  qbittorrent:
+#    image: lscr.io/linuxserver/qbittorrent:latest
+#    container_name: qbittorrent
+#    environment:
+#      - PUID=${PUID}
+#      - PGID=${PGID}
+#      - TZ=${TZ}
+#      - WEBUI_PORT=8081
+#      - TORRENTING_PORT=6881
+#    volumes:
+#      - ${CONFIG_ROOT}/qbittorrent:/config
+#      - ${DATA_ROOT}:/data
+#    ports:
+#      - 8081:8081
+#      - 6881:6881
+#      - 6881:6881/udp
+#    restart: unless-stopped
+
+# SABnzbd: Usenet Client
+#  sabnzbd:
+#    image: lscr.io/linuxserver/sabnzbd:latest
+#    container_name: sabnzbd
+#    environment:
+#      - PUID=${PUID}
+#      - PGID=${PGID}
+#      - TZ=${TZ}
+#    volumes:
+#      - ${CONFIG_ROOT}/sabnzbd:/config
+#      - ${DATA_ROOT}:/data
+#    ports:
+#      - 8080:8080
+#    restart: unless-stopped
+
 # Anime Metadata Engine
 #  shoko:
 #    image: ghcr.io/shokoanime/server:latest
