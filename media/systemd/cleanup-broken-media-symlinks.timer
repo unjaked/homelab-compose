@@ -1,0 +1,10 @@
+[Unit]
+Description=Run broken media symlink cleanup nightly
+
+[Timer]
+OnCalendar=*-*-* 04:30:00
+Persistent=true
+Unit=cleanup-broken-media-symlinks.service
+
+[Install]
+WantedBy=timers.target

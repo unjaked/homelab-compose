@@ -1,0 +1,10 @@
+[Unit]
+Description=Clean broken Jellyfin/Radarr/Sonarr media symlinks
+After=docker.service
+Wants=docker.service
+
+[Service]
+Type=oneshot
+Environment=DRY_RUN=0
+Environment=FORCE=0
+ExecStart=/home/jacob/homelab-compose/media/scripts/cleanup-broken-media-symlinks.sh
