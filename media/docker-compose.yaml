@@ -138,6 +138,22 @@ services:
       - 8191:8191
     restart: unless-stopped
 
+# Byparr-Proxy: Adds proxy to Byparr to imrpove capabilities
+  byparr-proxy:
+    build: ./byparr-proxy
+    container_name: byparr-proxy
+    restart: unless-stopped
+    environment:
+      UPSTREAM: https://1337x.to
+      BYPARR: http://byparr:8191/v1
+      TIMEOUT_MS: "120000"
+      PORT: "8888"
+      CACHE_TTL_S: "3600"
+      STUB_CAT_PATHS: "true"
+      LOG_LEVEL: INFO
+    depends_on:
+      - byparr
+
 # Arr File Cleanup Automation
   cleanuparr:
     image: ghcr.io/cleanuparr/cleanuparr:latest
