@@ -5,12 +5,175 @@
       CONFIG
    ═══════════════════════════════════════════════════════════════ */
 
-    const TRAKT_CLIENT_ID = "CLIENT_ID";
-    const SHOW_RATING = true;                   // Show the movie's score next to the year
+    const TRAKT_CLIENT_ID = "4e4ed9571b91ec29a12d100eaf056bc70bc236f1dc1c1a878a19bd78fc9d9ed0";
+    const SHOW_RATING = false;                   // Show the movie's score next to the year
     const SHOW_TRENDING_MOVIES = true;          // Show "Trending Movies" section
     const SHOW_TRENDING_SHOWS = false;          // Show "Trending Shows" section
+    const SHOW_PLATFORMS = false;               // Show "Platforms" section
+    const SHOW_FRANCHISES = false;              // Show "Franchises" section
     const SHOW_TRENDING_RANK_NUMBERS = true;    // Show the movie's ranking badge
-    const LIMIT = 50                            // How many movies/shows/cards to display (max 50)
+    const LIMIT = 25;                           // How many movies/shows/cards to display (max 50)
+
+    // Row orders (lower = higher on home screen)
+    const ROW_ORDER_TRENDING_MOVIES = 2;
+    const ROW_ORDER_TRENDING_SHOWS = 2;
+    const ROW_ORDER_PLATFORMS = 3;
+    const ROW_ORDER_FRANCHISES = 4;
+
+    /* ═══════════════════════════════════════════════════════════════
+        PLATFORMS — streaming service hubs
+        tag must match the Jellyfin tag on your items.
+    ═══════════════════════════════════════════════════════════════ */
+    const STUDIOS = [
+        {
+            name: "Apple TV+",
+            tag: "Apple TV",
+            gradient: "linear-gradient(135deg,#1a1a2e 0%,#0a0a0a 100%)",
+            logo: "https://image.tmdb.org/t/p/w780_filter(duotone,ffffff,bababa)/4KAy34EHvRM25Ih8wb82AuGU7zJ.png"
+        },
+        {
+            name: "Disney+",
+            tag: "Disney Plus",
+            gradient: "linear-gradient(135deg,#0c1b3a 0%,#050d1a 100%)",
+            logo: "https://lumiere-a.akamaihd.net/v1/images/a8e5567d1658de062d95d079ebf536b0_4096x2309_6dedcc02.png",
+            invert: true
+        },
+        {
+            name: "Prime Video",
+            tag: "Amazon Prime Video",
+            gradient: "linear-gradient(135deg,#0d1b2a 0%,#010409 100%)",
+            logo: "https://image.tmdb.org/t/p/w780_filter(duotone,ffffff,bababa)/ifhbNuuVnlwYy5oXA5VIb2YR8AZ.png"
+        },
+        {
+            name: "Netflix",
+            tag: "Netflix",
+            gradient: "linear-gradient(135deg,#1a0a0a 0%,#0d0000 100%)",
+            logo: "https://image.tmdb.org/t/p/w780_filter(duotone,ffffff,bababa)/wwemzKWzjKYJFfCeiB57q3r4Bcm.png"
+        },
+        {
+            name: "HBO Max",
+            tag: "HBO Max",
+            gradient: "linear-gradient(135deg,#1a0a2e 0%,#0d0018 100%)",
+            logo: "https://image.tmdb.org/t/p/w500_filter(duotone,ffffff,bababa)/nmU0UMDJB3dRRQSTUqawzF2Od1a.png"
+        }
+    ];
+
+    /* ═══════════════════════════════════════════════════════════════
+       FRANCHISES — collection hubs by Jellyfin tag
+       tag must match the Jellyfin tag on your items.
+    ═══════════════════════════════════════════════════════════════ */
+    const FRANCHISES = [
+        {
+            name: "Marvel",
+            tag: "marvel",
+            gradient: "linear-gradient(135deg,#1a0a0a 0%,#2a0a0a 50%,#0a0a0a 100%)",
+            logo: "https://image.tmdb.org/t/p/w780_filter(duotone,ffffff,bababa)/mIkZDuulwMPzESbzF9lg3rD8CcO.png"
+        },
+        {
+            name: "Star Wars",
+            tag: "star wars",
+            gradient: "linear-gradient(135deg,#0a0a1a 0%,#1a1a00 50%,#0a0a0a 100%)",
+            logo: "https://pngimg.com/d/star_wars_logo_PNG18.png",
+            invert: true
+        },
+        {
+            name: "DC Universe",
+            tag: "dc universe",
+            gradient: "linear-gradient(135deg,#0a1028 0%,#162a50 50%,#0a0a12 100%)",
+            logo: "https://image.tmdb.org/t/p/w780_filter(duotone,ffffff,bababa)/2Tc1P3Ac8M479naPp1kYT3izLS5.png",
+            big: true
+        },
+        {
+            name: "Pixar",
+            tag: "pixar",
+            gradient: "linear-gradient(135deg,#0a1525 0%,#0d2540 50%,#0a0a12 100%)",
+            logo: "https://image.tmdb.org/t/p/w780_filter(duotone,ffffff,bababa)/1TjvGVDMYsj6JBxOAkUHpPEwLf7.png"
+        },
+        {
+            name: "Harry Potter",
+            tag: "harry potter",
+            gradient: "linear-gradient(135deg,#1a1420 0%,#0d0a18 50%,#0a0a0a 100%)",
+            logo: "https://cdn.freebiesupply.com/images/large/2x/harry-potter-logo-png-transparent.png",
+            invert: true
+        },
+        {
+            name: "Harry Potter",
+            tag: "harry potter",
+            gradient: "linear-gradient(135deg,#1a1420 0%,#0d0a18 50%,#0a0a0a 100%)",
+            logo: "https://cdn.freebiesupply.com/images/large/2x/harry-potter-logo-png-transparent.png",
+            invert: true
+        },
+        {
+            name: "Harry Potter",
+            tag: "harry potter",
+            gradient: "linear-gradient(135deg,#1a1420 0%,#0d0a18 50%,#0a0a0a 100%)",
+            logo: "https://cdn.freebiesupply.com/images/large/2x/harry-potter-logo-png-transparent.png",
+            invert: true
+        },
+        {
+            name: "Harry Potter",
+            tag: "harry potter",
+            gradient: "linear-gradient(135deg,#1a1420 0%,#0d0a18 50%,#0a0a0a 100%)",
+            logo: "https://cdn.freebiesupply.com/images/large/2x/harry-potter-logo-png-transparent.png",
+            invert: true
+        },
+        {
+            name: "Harry Potter",
+            tag: "harry potter",
+            gradient: "linear-gradient(135deg,#1a1420 0%,#0d0a18 50%,#0a0a0a 100%)",
+            logo: "https://cdn.freebiesupply.com/images/large/2x/harry-potter-logo-png-transparent.png",
+            invert: true
+        },
+        {
+            name: "Harry Potter",
+            tag: "harry potter",
+            gradient: "linear-gradient(135deg,#1a1420 0%,#0d0a18 50%,#0a0a0a 100%)",
+            logo: "https://cdn.freebiesupply.com/images/large/2x/harry-potter-logo-png-transparent.png",
+            invert: true
+        },
+        {
+            name: "Harry Potter",
+            tag: "harry potter",
+            gradient: "linear-gradient(135deg,#1a1420 0%,#0d0a18 50%,#0a0a0a 100%)",
+            logo: "https://cdn.freebiesupply.com/images/large/2x/harry-potter-logo-png-transparent.png",
+            invert: true
+        },
+        {
+            name: "Harry Potter",
+            tag: "harry potter",
+            gradient: "linear-gradient(135deg,#1a1420 0%,#0d0a18 50%,#0a0a0a 100%)",
+            logo: "https://cdn.freebiesupply.com/images/large/2x/harry-potter-logo-png-transparent.png",
+            invert: true
+        },
+        {
+            name: "Harry Potter",
+            tag: "harry potter",
+            gradient: "linear-gradient(135deg,#1a1420 0%,#0d0a18 50%,#0a0a0a 100%)",
+            logo: "https://cdn.freebiesupply.com/images/large/2x/harry-potter-logo-png-transparent.png",
+            invert: true
+        },
+        {
+            name: "Harry Potter",
+            tag: "harry potter",
+            gradient: "linear-gradient(135deg,#1a1420 0%,#0d0a18 50%,#0a0a0a 100%)",
+            logo: "https://cdn.freebiesupply.com/images/large/2x/harry-potter-logo-png-transparent.png",
+            invert: true
+        },
+        {
+            name: "Harry Potter",
+            tag: "harry potter",
+            gradient: "linear-gradient(135deg,#1a1420 0%,#0d0a18 50%,#0a0a0a 100%)",
+            logo: "https://cdn.freebiesupply.com/images/large/2x/harry-potter-logo-png-transparent.png",
+            invert: true
+        },
+        {
+            name: "Pirates of the Caribbean",
+            tag: "pirates of the caribbean",
+            gradient: "linear-gradient(135deg,#0a1018 0%,#1a1a0a 50%,#0a0a0a 100%)",
+            logo: "https://upload.wikimedia.org/wikipedia/commons/5/52/POTC_Logo.png",
+            invert: true
+        }
+    ];
 
     /* ═══════════════════════════════════════════════════════════════
        CSS
@@ -23,9 +186,8 @@
         s.id = "jfcr-css";
 
         s.textContent = `
-            #custom-rows-wrapper {
+            .custom-jf-row {
                 display: block;
-                margin-bottom: 20px;
             }
 
             .top10-section {
@@ -134,6 +296,100 @@
                 animation: t10sp .8s linear infinite;
             }
 
+            /* Platform / Franchise logo hub rows */
+            .hub-section .hub-scroll {
+                gap: var(--itemColumnGap, 14px);
+            }
+
+            .hub-card {
+                flex: 0 0 200px;
+                width: 200px;
+            }
+
+            .hub-card .cardBox {
+                width: 100%;
+            }
+
+            .hub-card-scalable {
+                position: relative;
+            }
+
+            .hub-card-padder {
+                padding-bottom: 55%;
+            }
+
+            .hub-logo-card {
+                position: absolute;
+                inset: 0;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1.5px solid rgba(255,255,255,.06);
+                overflow: hidden;
+                cursor: pointer;
+            }
+
+            .hub-logo-card::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(135deg, rgba(255,255,255,.04) 0%, transparent 60%);
+                pointer-events: none;
+            }
+
+            .hub-logo-card img {
+                height: 42px;
+                max-width: 65%;
+                object-fit: contain;
+                position: relative;
+                z-index: 1;
+            }
+
+            .hub-logo-card img.hub-invert {
+                filter: brightness(0) invert(1);
+                height: 58px;
+                max-width: 75%;
+            }
+
+            .hub-logo-card img.hub-big {
+                height: 55px;
+                max-width: 72%;
+            }
+
+            .hub-logo-card img.hub-big.hub-invert {
+                height: 68px;
+                max-width: 80%;
+            }
+
+            .hub-card:hover .hub-logo-card,
+            .hub-card:focus-visible .hub-logo-card {
+                border-color: rgba(255,255,255,.2);
+                box-shadow: 0 8px 30px rgba(0,0,0,.5);
+            }
+
+            .hub-active-card .hub-logo-card {
+                border-color: rgba(255,255,255,.3) !important;
+                box-shadow: 0 4px 20px rgba(255,255,255,.06) !important;
+            }
+
+            .hub-items-row-empty {
+                display: block;
+            }
+
+            .hub-items-row-empty .hub-empty {
+                padding: 14px 0;
+                font-size: .85em;
+                opacity: .65;
+            }
+
+            .hub-loading {
+                padding-top: 14px;
+                padding-bottom: 14px;
+                font-size: .85em;
+                opacity: .65;
+            }
+
             @keyframes t10sp {
                 to {
                     transform: rotate(360deg);
@@ -158,6 +414,37 @@
                     --cardCount: 4;
                     --itemColumnGap: 10px;
                     --effectiveWidth: 92vw;
+                }
+
+                .hub-section .hub-scroll {
+                    gap: 8px;
+                }
+
+                .hub-card {
+                    flex-basis: 150px;
+                    width: 150px;
+                }
+
+                .hub-logo-card {
+                    border-radius: 10px;
+                }
+
+                .hub-logo-card img {
+                    height: 30px;
+                    max-width: 60%;
+                }
+
+                .hub-logo-card img.hub-invert {
+                    height: 42px;
+                    max-width: 70%;
+                }
+
+                .hub-logo-card img.hub-big {
+                    height: 38px;
+                }
+
+                .hub-logo-card img.hub-big.hub-invert {
+                    height: 48px;
                 }
             }
         `;
@@ -208,7 +495,7 @@
         });
     }
 
-    function createEmbyScroller() {
+    function createEmbyScroller(itemsExtraClass = "top10-items") {
         /*
            Jellyfin uses customized built-in elements like:
            <div is="emby-scroller" class="emby-scroller ...">
@@ -238,7 +525,7 @@
         }
 
         itemsContainer.setAttribute("is", "emby-itemscontainer");
-        itemsContainer.className = "itemsContainer scrollSlider focuscontainer-x top10-items";
+        itemsContainer.className = `itemsContainer scrollSlider focuscontainer-x ${itemsExtraClass}`;
 
         scroller.appendChild(itemsContainer);
 
@@ -280,7 +567,7 @@
         let trending = [];
 
         try {
-            const r = await fetch(`https://api.trakt.tv/${endpoint}/trending?${LIMIT}`, {
+            const r = await fetch(`https://api.trakt.tv/${endpoint}/trending?=${LIMIT}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "trakt-api-version": "2",
@@ -312,7 +599,7 @@
         const fallbackImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='270'%3E%3Crect width='180' height='270' fill='%23111'/%3E%3C/svg%3E";
 
         for (const entry of trending) {
-            if (results.length >= 50) break;
+            if (results.length >= LIMIT) break;
 
             const media = type === "movie" ? entry.movie : entry.show;
             if (!media) continue;
@@ -591,6 +878,211 @@
     }
 
     /* ═══════════════════════════════════════════════════════════════
+   TAG HUB HELPERS — Platforms / Franchises
+═══════════════════════════════════════════════════════════════ */
+    let currentPlatformOpen = null;
+    let currentFranchiseOpen = null;
+
+    function buildNativeSectionTitle(title) {
+        const titleContainer = document.createElement("div");
+        titleContainer.className = "sectionTitleContainer sectionTitleContainer-cards padded-left";
+
+        const titleEl = document.createElement("h2");
+        titleEl.className = "sectionTitle sectionTitle-cards";
+        titleEl.textContent = title;
+
+        titleContainer.appendChild(titleEl);
+        return titleContainer;
+    }
+
+    async function fetchByTag(tag) {
+        const { token, userId, base } = gc();
+
+        if (!token || !userId || !base) return [];
+
+        const tags = Array.isArray(tag) ? tag : [tag];
+        const allItems = [];
+        const seen = new Set();
+
+        try {
+            for (const t of tags) {
+                const url = `${base}/Users/${userId}/Items?IncludeItemTypes=Movie,Series&Tags=${encodeURIComponent(t)}&Recursive=true&SortBy=PremiereDate&SortOrder=Descending&Limit=${LIMIT}&Fields=PrimaryImageAspectRatio,PremiereDate,ProductionYear&ImageTypeLimit=1&EnableImageTypes=Primary`;
+
+                const r = await fetch(url, {
+                    headers: {
+                        Authorization: `MediaBrowser Token="${token}"`
+                    }
+                });
+
+                if (!r.ok) continue;
+
+                const data = await r.json();
+
+                for (const item of data.Items || []) {
+                    if (seen.has(item.Id)) continue;
+
+                    seen.add(item.Id);
+                    allItems.push(item);
+                }
+            }
+
+            allItems.sort((a, b) => {
+                return new Date(b.PremiereDate || 0) - new Date(a.PremiereDate || 0);
+            });
+
+            return allItems;
+        } catch {
+            return [];
+        }
+    }
+
+    function buildHubThumbRow(items) {
+        const { base } = gc();
+        const row = document.createElement("div");
+        row.className = "hub-items-row";
+
+        if (!items.length) {
+            row.classList.add("padded-left", "padded-right", "hub-items-row-empty");
+
+            const empty = document.createElement("div");
+            empty.className = "hub-empty";
+            empty.textContent = "No content found";
+
+            row.appendChild(empty);
+            return row;
+        }
+
+        for (const item of items) {
+            const thumb = document.createElement("div");
+            thumb.className = "hub-thumb";
+            thumb.tabIndex = 0;
+            thumb.title = item.Name;
+
+            const src = item.ImageTags?.Primary
+                ? `${base}/Items/${item.Id}/Images/Primary?maxHeight=300&tag=${item.ImageTags.Primary}`
+                : "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='195'%3E%3Crect fill='%23222' width='130' height='195'/%3E%3C/svg%3E";
+
+            const label = item.Name + (item.ProductionYear ? ` (${item.ProductionYear})` : "");
+
+            thumb.innerHTML = `
+            <img src="${src}" alt="${escapeHtml(item.Name)}" loading="lazy">
+            <div class="hub-thumb-title">${escapeHtml(label)}</div>
+        `;
+
+            const openDetails = () => {
+                location.hash = `#/details?id=${item.Id}&serverId=${item.ServerId || ""}`;
+            };
+
+            thumb.addEventListener("click", openDetails);
+            thumb.addEventListener("keydown", e => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    openDetails();
+                }
+            });
+
+            row.appendChild(thumb);
+        }
+
+        return row;
+    }
+
+    async function toggleHubSection(entry, cardEl, section, stateKey) {
+        const activeClass = "hub-active-card";
+        const existing = section.querySelector(".hub-items-row");
+        const currentTag = stateKey === "platform" ? currentPlatformOpen : currentFranchiseOpen;
+
+        if (existing && currentTag === entry.tag) {
+            existing.remove();
+            cardEl.classList.remove(activeClass);
+
+            if (stateKey === "platform") currentPlatformOpen = null;
+            else currentFranchiseOpen = null;
+
+            return;
+        }
+
+        if (existing) existing.remove();
+
+        section.querySelectorAll("." + activeClass).forEach(card => {
+            card.classList.remove(activeClass);
+        });
+
+        cardEl.classList.add(activeClass);
+
+        if (stateKey === "platform") currentPlatformOpen = entry.tag;
+        else currentFranchiseOpen = entry.tag;
+
+        const loading = document.createElement("div");
+        loading.className = "hub-loading padded-left padded-right";
+        loading.textContent = "Loading…";
+        section.appendChild(loading);
+
+        const items = await fetchByTag(entry.tag);
+
+        loading.remove();
+        section.appendChild(buildHubThumbRow(items));
+    }
+
+    function buildHubSection(title, entries, stateKey) {
+        const section = document.createElement("div");
+        section.className = "verticalSection hub-section";
+
+        section.appendChild(buildNativeSectionTitle(title));
+
+        const { scroller, itemsContainer } = createEmbyScroller("hub-scroll");
+
+        for (const entry of entries) {
+            const card = document.createElement("div");
+            card.className = "hub-card card card-hoverable";
+            card.tabIndex = 0;
+            card.title = entry.name;
+
+            card.innerHTML = `
+                <div class="cardBox">
+                    <div class="cardScalable hub-card-scalable">
+                        <div class="cardPadder hub-card-padder"></div>
+
+                        <div class="cardContent hub-logo-card" style="background: ${entry.gradient};">
+                            <img
+                                src="${entry.logo}"
+                                alt="${escapeHtml(entry.name)}"
+                                class="${entry.invert ? "hub-invert" : ""} ${entry.big ? "hub-big" : ""}"
+                                loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const toggle = () => {
+                toggleHubSection(entry, card, section, stateKey);
+            };
+
+            card.addEventListener("click", toggle);
+            card.addEventListener("keydown", e => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    toggle();
+                }
+            });
+
+            itemsContainer.appendChild(card);
+        }
+
+        section.appendChild(scroller);
+
+        return section;
+    }
+
+    function buildPlatformSection() {
+        return buildHubSection("Platforms", STUDIOS, "platform");
+    }
+
+    function buildFranchiseSection() {
+        return buildHubSection("Franchises", FRANCHISES, "franchise");
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
        INJECT INTO JELLYFIN HOME
     ═══════════════════════════════════════════════════════════════ */
     function isHomePage() {
@@ -609,7 +1101,7 @@
     function injectUI() {
         if (!isHomePage()) return;
 
-        const existing = document.getElementById("custom-rows-wrapper");
+        const existing = document.getElementById("custom-rows-marker");
         if (existing) return;
 
         const container =
@@ -621,22 +1113,46 @@
 
         injectCSS();
 
-        const wrapper = document.createElement("div");
-        wrapper.id = "custom-rows-wrapper";
-        wrapper.className = "verticalSection customTrendingSection";
-        wrapper.style.order = "2";
+        const rows = [
+            {
+                enabled: SHOW_PLATFORMS,
+                order: ROW_ORDER_PLATFORMS,
+                build: buildPlatformSection
+            },
+            {
+                enabled: SHOW_FRANCHISES,
+                order: ROW_ORDER_FRANCHISES,
+                build: buildFranchiseSection
+            },
+            {
+                enabled: SHOW_TRENDING_MOVIES,
+                order: ROW_ORDER_TRENDING_MOVIES,
+                build: () => buildTop10Section("Trending Movies", "movie")
+            },
+            {
+                enabled: SHOW_TRENDING_SHOWS,
+                order: ROW_ORDER_TRENDING_SHOWS,
+                build: () => buildTop10Section("Trending Shows", "tv")
+            }
+        ]
+            .filter(row => row.enabled)
+            .sort((a, b) => a.order - b.order);
 
-        if (SHOW_TRENDING_MOVIES) {
-            wrapper.appendChild(buildTop10Section("Trending Movies", "movie"));
+        if (!rows.length) return;
+
+        const marker = document.createElement("div");
+        marker.id = "custom-rows-marker";
+        marker.style.display = "none";
+        container.appendChild(marker);
+
+        for (const rowConfig of rows) {
+            const row = rowConfig.build();
+
+            row.classList.add("custom-jf-row");
+            row.style.order = String(rowConfig.order);
+
+            container.appendChild(row);
         }
-
-        if (SHOW_TRENDING_SHOWS) {
-            wrapper.appendChild(buildTop10Section("Trending Shows", "tv"));
-        }
-
-        if (!wrapper.children.length) return;
-
-        container.appendChild(wrapper);
 
         setTimeout(() => {
             window.dispatchEvent(new Event("resize"));
@@ -646,8 +1162,12 @@
     function removeUIWhenLeavingHome() {
         if (isHomePage()) return;
 
-        const existing = document.getElementById("custom-rows-wrapper");
-        if (existing) existing.remove();
+        const marker = document.getElementById("custom-rows-marker");
+        if (marker) marker.remove();
+
+        document.querySelectorAll(".custom-jf-row").forEach(row => {
+            row.remove();
+        });
     }
 
     const observer = new MutationObserver(() => {

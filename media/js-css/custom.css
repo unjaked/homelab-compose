@@ -11,7 +11,7 @@
 
 
 /* -------------------------------------------------------
-   Streamlined sidebar for NON-ADMIN users only.
+   Streamlined/decluttered sidebar for NON-ADMIN users only.
    Detects non-admin by looking for "Dashboard" button. 
 ------------------------------------------------------- */
 
@@ -50,11 +50,6 @@ body:not(:has(a[href*="/dashboard"])) .navMenuOptionIcon {
 body:not(:has(a[href*="/dashboard"])) .navMenuOptionText,
 body:not(:has(a[href*="/dashboard"])) .sectionName {
     font-size: 1em !important;
-}
-
-/* Hide Appearance button f */
-body:not(:has(a[href*="/dashboard"])) .skinHeader .headerAppearanceButton {
-    display: none !important;
 }
 
 /* ---------- HOME SECTION ---------- */
@@ -145,38 +140,24 @@ body:not(:has(a[href*="/dashboard"])) .userMenuOptions .btnLogout {
     order: 3 !important;
 }
 
-/* ---------- PLUGIN SETTINGS ---------- */
+/* ---------- PLUGINS ---------- */
 
 /* Hide Modular Home / Plugin Settings section */
 body:not(:has(a[href*="/dashboard"])) .pluginMenuOptions {
     display: none !important;
 }
 
-/* ---------- ALL USERS ---------- */
-/* Hide the Watchlist custom tab from the top Home tab bar,
-   but keep the custom tab itself alive for the sidebar link. */
+/* -------------------------------------------------------
+   Other UI streamlining/decluttering
+------------------------------------------------------- */
+/* Hide the Watchlist */
 .emby-tabs-slider #customTabButton_0 {
     display: none !important;
 }
 
-/* Hide the original top-right search button */
-.skinHeader button.headerSearchButton,
-.skinHeader .headerSearchButton {
+/* Hide Appearance button */
+body:not(:has(a[href*="/dashboard"])) .skinHeader .headerAppearanceButton {
     display: none !important;
-}
-
-/* Add search icon before the Search custom tab text without relying on icon fonts */
-.emby-tabs-slider #customTabButton_1 .emby-button-foreground::before {
-    content: "" !important;
-    display: inline-block !important;
-    width: 1.2em !important;
-    height: 1.2em !important;
-    margin-right: 0.4em !important;
-    background-color: currentColor !important;
-    flex: 0 0 auto !important;
-
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.5 3a6.5 6.5 0 0 1 5.18 10.43l5.44 5.45-1.41 1.41-5.45-5.44A6.5 6.5 0 1 1 9.5 3m0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9Z'/%3E%3C/svg%3E") center / contain no-repeat !important;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.5 3a6.5 6.5 0 0 1 5.18 10.43l5.44 5.45-1.41 1.41-5.45-5.44A6.5 6.5 0 1 1 9.5 3m0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9Z'/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 
 /* Keep icon + Search text aligned nicely */
@@ -184,11 +165,6 @@ body:not(:has(a[href*="/dashboard"])) .pluginMenuOptions {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-}
-
-/* Hide the Favorites tab from the top Home tab pill */
-.headerTabs .emby-tabs-slider .emby-tab-button[data-index="1"] {
-    display: none !important;
 }
 
 /* Re-enable Guide tab (only on Live TV pages) */
