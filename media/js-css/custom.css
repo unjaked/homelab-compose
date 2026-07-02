@@ -1,0 +1,209 @@
+/* -------------------------------------------------------
+   Intro Skipper
+------------------------------------------------------- */
+
+@import url("https://cdn.jsdelivr.net/gh/intro-skipper/intro-skipper-css@main/skip-button.min.css");
+
+:root {
+    /* Skip button timing */
+    --skip-hide-duration: 8s;
+}
+
+
+/* -------------------------------------------------------
+   Streamlined sidebar for NON-ADMIN users only.
+   Detects non-admin by looking for "Dashboard" button. 
+------------------------------------------------------- */
+
+body:not(:has(a[href*="/dashboard"])) .mainDrawer-scrollContainer {
+    display: block !important;
+}
+
+/* ---------- GENERAL SIDEBAR SPACING ---------- */
+
+body:not(:has(a[href*="/dashboard"])) .mainDrawer-scrollContainer {
+    padding-top: 0.75em !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .sidebarHeader {
+    margin: 1.25em 0 0.35em 1.35em !important;
+    padding: 0 !important;
+    font-size: 1.05em !important;
+    font-weight: 500 !important;
+    line-height: 1.3 !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .navMenuOption {
+    min-height: 3.35em !important;
+    height: 3.35em !important;
+    padding: 0 1.6em !important;
+    margin: 0 !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .navMenuOptionIcon {
+    width: 2.4em !important;
+    min-width: 2.4em !important;
+    margin-right: 1.05em !important;
+    font-size: 1.45em !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .navMenuOptionText,
+body:not(:has(a[href*="/dashboard"])) .sectionName {
+    font-size: 1em !important;
+}
+
+/* Hide Appearance button f */
+body:not(:has(a[href*="/dashboard"])) .skinHeader .headerAppearanceButton {
+    display: none !important;
+}
+
+/* ---------- HOME SECTION ---------- */
+
+/* Hide the Jellyfin Enhanced/Home header entirely */
+body:not(:has(a[href*="/dashboard"])) .jellyfinEnhancedSection>.sidebarHeader {
+    display: none !important;
+}
+
+/* Move Home + Watchlist visually into the Home section */
+body:not(:has(a[href*="/dashboard"])) .mainDrawer-scrollContainer>a[href="#/home"] {
+    margin-top: 0 !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .customMenuOptions {
+    margin: 0 !important;
+}
+
+/* Hide Enhanced Panel */
+body:not(:has(a[href*="/dashboard"])) #jellyfinEnhancedSettingsLink {
+    display: none !important;
+}
+
+/* Put Requests after Bookmarks by using flex only inside this section */
+body:not(:has(a[href*="/dashboard"])) .jellyfinEnhancedSection {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .jellyfinEnhancedSection>.sidebarHeader {
+    order: 1 !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .jellyfinEnhancedSection .je-nav-bookmarks-item {
+    order: 2 !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .jellyfinEnhancedSection .je-nav-downloads-item {
+    order: 3 !important;
+}
+
+/* ---------- MEDIA SECTION ---------- */
+
+/* Hide Guide */
+body:not(:has(a[href*="/dashboard"])) .libraryMenuOptions a[href*="/livetv?tab=1"] {
+    display: none !important;
+}
+
+/* Hide Playlists */
+body:not(:has(a[href*="/dashboard"])) .libraryMenuOptions a[href*="/list?parentId="] {
+    display: none !important;
+}
+
+/* Reorder Media section so Movies appears before Live TV */
+body:not(:has(a[href*="/dashboard"])) .libraryMenuOptions {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .libraryMenuOptions>.sidebarHeader {
+    order: 1 !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .libraryMenuOptions a[href*="/movies"] {
+    order: 2 !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .libraryMenuOptions a[href*="/livetv?collectionType=livetv"] {
+    order: 3 !important;
+}
+
+/* ---------- USER SECTION ---------- */
+
+body:not(:has(a[href*="/dashboard"])) .userMenuOptions {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .userMenuOptions>.sidebarHeader {
+    order: 1 !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .userMenuOptions .btnSettings {
+    order: 2 !important;
+}
+
+body:not(:has(a[href*="/dashboard"])) .userMenuOptions .btnLogout {
+    order: 3 !important;
+}
+
+/* ---------- PLUGIN SETTINGS ---------- */
+
+/* Hide Modular Home / Plugin Settings section */
+body:not(:has(a[href*="/dashboard"])) .pluginMenuOptions {
+    display: none !important;
+}
+
+/* ---------- ALL USERS ---------- */
+/* Hide the Watchlist custom tab from the top Home tab bar,
+   but keep the custom tab itself alive for the sidebar link. */
+.emby-tabs-slider #customTabButton_0 {
+    display: none !important;
+}
+
+/* Hide the original top-right search button */
+.skinHeader button.headerSearchButton,
+.skinHeader .headerSearchButton {
+    display: none !important;
+}
+
+/* Add search icon before the Search custom tab text without relying on icon fonts */
+.emby-tabs-slider #customTabButton_1 .emby-button-foreground::before {
+    content: "" !important;
+    display: inline-block !important;
+    width: 1.2em !important;
+    height: 1.2em !important;
+    margin-right: 0.4em !important;
+    background-color: currentColor !important;
+    flex: 0 0 auto !important;
+
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.5 3a6.5 6.5 0 0 1 5.18 10.43l5.44 5.45-1.41 1.41-5.45-5.44A6.5 6.5 0 1 1 9.5 3m0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9Z'/%3E%3C/svg%3E") center / contain no-repeat !important;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.5 3a6.5 6.5 0 0 1 5.18 10.43l5.44 5.45-1.41 1.41-5.45-5.44A6.5 6.5 0 1 1 9.5 3m0 2a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9Z'/%3E%3C/svg%3E") center / contain no-repeat !important;
+}
+
+/* Keep icon + Search text aligned nicely */
+.emby-tabs-slider #customTabButton_1 .emby-button-foreground {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Hide the Favorites tab from the top Home tab pill */
+.headerTabs .emby-tabs-slider .emby-tab-button[data-index="1"] {
+    display: none !important;
+}
+
+/* Re-enable Guide tab (only on Live TV pages) */
+body:has(.liveTvGuidePage) .headerTabs .emby-tabs-slider .emby-tab-button[data-index="1"],
+body:has(.guidePage) .headerTabs .emby-tabs-slider .emby-tab-button[data-index="1"] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Re-enable TV guide pill section */
+body:has(.mainAnimatedPage.liveTvPage:not(.hide)) .headerTabs.sectionTabs .emby-tabs-slider>.emby-tab-button[data-index="1"] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
