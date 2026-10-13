@@ -101,7 +101,7 @@ services:
 
 # Decypharr: Debrid-Arr Interface
   decypharr:
-    image: local/decypharr:twistedrat-partial-link-failure
+    image: cy01/blackhole:latest
     container_name: decypharr
 #    user: "${PUID}:${PGID}"
     environment:
