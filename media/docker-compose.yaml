@@ -180,6 +180,30 @@ services:
       timeout: 10s
       start_period: 30s
       retries: 3
+    
+  # Comicarr: Comic & Manga Collection Manager
+  comicarr:
+    image: ghcr.io/frankieramirez/comicarr:latest
+    container_name: comicarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - UMASK=002
+    volumes:
+      - ${CONFIG_ROOT}/comicarr:/config
+
+      # Final libraries
+      - ${DATA_ROOT}/media/comics:/comics
+      - ${DATA_ROOT}/media/manga:/manga
+
+      - /mnt/decypharr:/mnt/decypharr:rshared
+      - /mnt/decypharr:/downloads:rshared
+
+    ports:
+      - 8090:8090
+    restart: unless-stopped
+    stop_grace_period: 30s
       
 # qBittorrent: Torrent client 
 #  qbittorrent:
